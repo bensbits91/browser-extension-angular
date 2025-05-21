@@ -1,16 +1,19 @@
 .popup {
+  padding: 20px;
+  min-width: 200px;
+  width: max-content;
+
+  &.dark {
+    background: #222;
+    color: #fff;
+  }
+}
+
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px;
-  min-width: 200px;
-  width: max-content;
-}
-
-.dark {
-  background: #222;
-  color: #fff;
 }
 
 button {
