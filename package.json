@@ -6,6 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "build:content": "tsc -p tsconfig.content.json",
+    "build:background": "tsc -p tsconfig.background.json",
+    "build:all": "npm run build popup && npm run build:content && npm run build:background",
     "test": "ng test"
   },
   "private": true,

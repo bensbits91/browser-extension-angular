@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist/popup/browser",
+    "noEmitOnError": false
+  },
+  "include": ["src/app/background/background.ts"]
+}
