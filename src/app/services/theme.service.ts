@@ -10,20 +10,20 @@ export class ThemeService {
   private readonly key = 'darkMode';
 
   setDarkMode(value: boolean): void {
-  if (
-    typeof chrome !== 'undefined' &&
-    chrome.storage &&
-    chrome.storage.sync
-  ) {
-    chrome.storage.sync.set({ [this.key]: value }, () => {
-      if (chrome.runtime && chrome.runtime.lastError) {
-        console.error('Storage set error:', chrome.runtime.lastError);
-      } else {
-        console.log('Saved darkMode:', value);
-      }
-    });
+    if (
+      typeof chrome !== 'undefined' &&
+      chrome.storage &&
+      chrome.storage.sync
+    ) {
+      chrome.storage.sync.set({ [this.key]: value }, () => {
+        if (chrome.runtime && chrome.runtime.lastError) {
+          console.error('Storage set error:', chrome.runtime.lastError);
+        } else {
+          console.log('Saved darkMode:', value);
+        }
+      });
+    }
   }
-}
 
   getDarkMode(): Promise<boolean> {
     return new Promise((resolve) => {
