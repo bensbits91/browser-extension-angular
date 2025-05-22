@@ -7,7 +7,6 @@ class FormDetector {
 
   reportForms(): void {
     const forms = this.detectForms();
-    // For demonstration, we'll just log them
     console.log(`[FormDetector] Found ${forms.length} form(s) on the page.`);
 
     const formSummaries = forms.map((form) => ({
