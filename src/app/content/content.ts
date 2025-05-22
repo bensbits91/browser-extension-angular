@@ -31,3 +31,12 @@ class FormDetector {
 // Run detection when the content script loads
 const detector = new FormDetector();
 detector.reportForms();
+
+// Listen for highlight message from background script
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'HIGHLIGHT_FORMS') {
+    document.querySelectorAll('form').forEach((form) => {
+      (form as HTMLElement).style.outline = '4px solid darkorange';
+    });
+  }
+});
