@@ -1,4 +1,4 @@
-interface FormSummary {
+export interface FormSummary {
   action: string;
   method: string;
   id: string;
@@ -6,66 +6,40 @@ interface FormSummary {
 }
 
 export class FormHelper {
+  static INPUT_SELECTOR = 'input, textarea';
+  static INPUTS_TO_IGNORE = new Set(['submit', 'button', 'reset', 'image']);
+
+  /**
+   * Detects all input and textarea elements in the DOM, excluding button-like inputs.
+   * Also observes for new elements added during the timeout window.
+   */
   static detectForms(timeout: number = 100): Promise<Element[]> {
     return new Promise((resolve) => {
       const detected = new WeakSet<Element>();
-      const forms: Element[] = [];
+      const elements: Element[] = [];
 
-      function scanNode(root: ParentNode) {
-        root.childNodes.forEach((node: any) => {
-          if (!(node instanceof Element)) return;
-
-          // If it's a form, add and don't traverse inside
-          if (node.matches('form')) {
-            if (!detected.has(node)) {
-              detected.add(node);
-              forms.push(node);
-            }
-            return;
-          }
-
-          // If it's an input or textarea NOT inside a form, add it
-          if (
-            (node.matches('input') || node.matches('textarea')) &&
-            !node.closest('form')
-          ) {
-            if (!detected.has(node)) {
-              detected.add(node);
-              forms.push(node);
-            }
-          }
-
-          // Continue traversing children (unless it's a form)
-          scanNode(node);
-        });
-      }
+      const shouldAddElement = (node: Element) => {
+        if (node.matches('input')) {
+          const type = (node.getAttribute('type') || '').toLowerCase();
+          if (FormHelper.INPUTS_TO_IGNORE.has(type)) return;
+        }
+        if (node.matches(FormHelper.INPUT_SELECTOR) && !detected.has(node)) {
+          detected.add(node);
+          elements.push(node);
+        }
+      };
 
       // Initial scan
-      scanNode(document);
+      document.querySelectorAll(FormHelper.INPUT_SELECTOR).forEach(shouldAddElement);
 
+      // Observe for new inputs and textareas added to the DOM
       const observer = new MutationObserver((mutations) => {
         mutations.forEach(({ addedNodes }) => {
           addedNodes.forEach((node: any) => {
             if (!(node instanceof Element)) return;
-
-            if (node.matches('form')) {
-              if (!detected.has(node)) {
-                detected.add(node);
-                forms.push(node);
-              }
-              return;
-            }
-
-            if (
-              (node.matches('input') || node.matches('textarea')) &&
-              !node.closest('form')
-            ) {
-              if (!detected.has(node)) {
-                detected.add(node);
-                forms.push(node);
-              }
-            }
-            scanNode(node);
+            // Check the node itself and all its descendants
+            [node, ...(node.querySelectorAll ? Array.from(node.querySelectorAll(FormHelper.INPUT_SELECTOR)) : [])]
+              .forEach((el: Element) => shouldAddElement(el));
           });
         });
       });
@@ -74,11 +48,14 @@ export class FormHelper {
 
       setTimeout(() => {
         observer.disconnect();
-        resolve(forms);
+        resolve(elements);
       }, timeout);
     });
   }
 
+  /**
+   * Serializes form elements to a summary object.
+   */
   static serializeForms(forms: Element[]) {
     return forms.map((form) => {
       const f = form as HTMLFormElement;
@@ -91,11 +68,17 @@ export class FormHelper {
     });
   }
 
+  /**
+   * Detects and serializes all form elements in the DOM.
+   */
   static async getFormSummaries(): Promise<FormSummary[]> {
     const forms = await this.detectForms();
     return this.serializeForms(forms);
   }
 
+  /**
+   * Highlights all detected form elements with a colored outline.
+   */
   static async highlightForms(
     color: string = '4px solid darkorange'
   ): Promise<void> {
