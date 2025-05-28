@@ -7,10 +7,20 @@ export class FormMessagingService {
 
   getForms(): Promise<any[]> {
     return new Promise((resolve) => {
-      chrome.runtime.sendMessage({ type: 'GET_FORMS' }, (response: any) => {
-        this.ngZone.run(() => {
-          resolve(response?.forms || []);
-        });
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (!tabs[0]?.id) {
+          resolve([]);
+          return;
+        }
+        chrome.tabs.sendMessage(
+          tabs[0].id,
+          { type: 'GET_FORMS' },
+          (response: any) => {
+            this.ngZone.run(() => {
+              resolve(response?.forms || []);
+            });
+          }
+        );
       });
     });
   }
