@@ -3,7 +3,7 @@
 This is a quick test project for me to explore browser extension architecture/features and to refresh my Angular skills.  
 
 **Goals:** 
-- Simple detection forms and standalone inputs and textareas
+- Simple detection of inputs and textareas
 - List detected elements in the popup UI
 - Add a context menu item to highlight detected elements on the page
 
@@ -17,7 +17,7 @@ This is a quick test project for me to explore browser extension architecture/fe
 - **Manifest V3** Chrome extension architecture
 - Modular background, content, and popup scripts
 - Context menu integration
-- Form detection and highlighting on web pages
+- Input detection and highlighting on web pages
 - Dark mode toggle in the popup, persisted to storage.sync
 - Build tooling: Angular CLI & esbuild
 - Service-based architecture for messaging and storage
@@ -74,8 +74,8 @@ This is a quick test project for me to explore browser extension architecture/fe
 
 4. **Try it out:**
    - Click the extension icon to open the popup
-   - Right-click on a page to see the context menu and highlight forms
-   - Use the popup to toggle dark mode and view detected forms
+   - Right-click on a page to see the context menu and highlight inputs
+   - Use the popup to toggle dark mode and view detected inputs
 
 ---
 
