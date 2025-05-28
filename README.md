@@ -96,5 +96,6 @@ Run unit tests with:
 
 ## To Do
 
+- Unit testing for services
 - Cross-browser support and testing
-- Smarter detection
+- Smarter element detection
