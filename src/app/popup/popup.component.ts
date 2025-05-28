@@ -21,9 +21,8 @@ export class PopupComponent {
   constructor(
     private formMessaging: FormMessagingService,
     private themeService: ThemeService,
-    private tabInfoService: TabInfoService
-  ) // private ngZone: NgZone
-  {}
+    private tabInfoService: TabInfoService // private ngZone: NgZone
+  ) {}
 
   ngOnInit() {
     this.themeService.getDarkMode().then((value) => {
@@ -35,11 +34,6 @@ export class PopupComponent {
       this.tabUrl = info.url;
     });
 
-    // chrome.runtime.sendMessage({ type: 'GET_FORMS' }, (response: any) => {
-    //   this.ngZone.run(() => {
-    //     this.forms = response?.forms || [];
-    //   });
-    // });
     this.formMessaging.getForms().then((forms) => {
       this.forms = forms;
     });
