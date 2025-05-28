@@ -6,9 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "build:content": "esbuild src/app/content/content.ts --bundle --outfile=dist/popup/browser/content.js --platform=browser --target=es2021",
-    "build:background": "esbuild src/app/background/background.ts --bundle --outfile=dist/popup/browser/background/background.js --platform=browser --target=es2021",
-    "build:all": "npm run build popup && npm run build:content && npm run build:background",
+    "build:content": "esbuild src/app/content/content.ts --bundle --outfile=dist/browser/content.js --platform=browser --target=es2021",
+    "build:background": "esbuild src/app/background/background.ts --bundle --outfile=dist/browser/background.js --platform=browser --target=es2021",
+    "build:all": "ng build popup && npm run build:content && npm run build:background",
     "test": "ng test"
   },
   "private": true,
