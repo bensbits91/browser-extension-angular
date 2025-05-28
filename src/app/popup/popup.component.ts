@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormMessagingService } from '../services/formMessaging.service';
 import { ThemeService } from '../services/theme.service';
 import { TabInfoService } from '../services/tabInfo.service';
 
@@ -18,10 +19,11 @@ export class PopupComponent {
   forms: any[] = [];
 
   constructor(
+    private formMessaging: FormMessagingService,
     private themeService: ThemeService,
-    private tabInfoService: TabInfoService,
-    private ngZone: NgZone
-  ) {}
+    private tabInfoService: TabInfoService
+  ) // private ngZone: NgZone
+  {}
 
   ngOnInit() {
     this.themeService.getDarkMode().then((value) => {
@@ -33,10 +35,13 @@ export class PopupComponent {
       this.tabUrl = info.url;
     });
 
-    chrome.runtime.sendMessage({ type: 'GET_FORMS' }, (response: any) => {
-      this.ngZone.run(() => {
-        this.forms = response?.forms || [];
-      });
+    // chrome.runtime.sendMessage({ type: 'GET_FORMS' }, (response: any) => {
+    //   this.ngZone.run(() => {
+    //     this.forms = response?.forms || [];
+    //   });
+    // });
+    this.formMessaging.getForms().then((forms) => {
+      this.forms = forms;
     });
   }
 
