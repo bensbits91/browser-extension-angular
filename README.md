@@ -11,7 +11,7 @@ This is a quick test project for me to explore browser extension architecture/fe
 
 ---
 
-## 🚀 Noteworthy Features
+## Noteworthy Features
 
 - **Angular 19** used for the popup UI
 - **Manifest V3** Chrome extension architecture
@@ -24,7 +24,7 @@ This is a quick test project for me to explore browser extension architecture/fe
 
 ---
 
-## 🛠️ Stack
+## Stack
 
 - **Angular 19**
 - **TypeScript**
@@ -34,7 +34,7 @@ This is a quick test project for me to explore browser extension architecture/fe
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 - src/
   - app/
@@ -54,7 +54,7 @@ This is a quick test project for me to explore browser extension architecture/fe
 
 ---
 
-## 🏗️ How to Build & Use
+## How to Build & Use
 
 1. **Install dependencies:**
 
@@ -87,17 +87,14 @@ Run unit tests with:
 
 ---
 
-## ⚠️ Notes & Caveats
+## Notes
 
 - This is a **test project**—expect rough edges, incomplete features, and messy code.
 - The repo is intentionally minimal and focused on learning, not production readiness.
 - The extension currently only supports Chrome (Manifest V3).
 - If you run into issues with test types, see the `tsconfig.spec.json` for Jasmine setup.
 
----
+## To Do
 
-## 📚 Resources
-
-- [Chrome Extensions Developer Guide](https://developer.chrome.com/docs/extensions/)
-- [Angular Documentation](https://angular.dev/)
-- [esbuild Documentation](https://esbuild.github.io/)
+- Cross-browser support and testing
+- Smarter detection
