@@ -8,14 +8,29 @@
       <p>Title: {{ tabTitle }}</p>
       <p>URL: {{ tabUrl }}</p>
     </div>
-    <div *ngIf="forms.length">
-      <h2>Detected Forms</h2>
+    <div *ngIf="inputs.length">
+      <h2>Detected Inputs</h2>
       <ul>
-        <li *ngFor="let form of forms" class="formItem">
-          Action: {{ form.action }}<br />
-          Method: {{ form.method }}<br />
-          ID: {{ form.id }}<br />
-          Class: {{ form.className }}
+        <li *ngFor="let input of inputs" class="formItem">
+          <strong>{{
+            input.name ||
+              input.id ||
+              input.placeholder ||
+              input.type ||
+              input.tag ||
+              input.className
+          }}</strong>
+          <ul>
+            <li>Tag: {{ input.tag }}</li>
+            <li>Type: {{ input.type }}</li>
+            <li>Name: {{ input.name }}</li>
+            <li>Placeholder: {{ input.placeholder }}</li>
+            <li>ID: {{ input.id }}</li>
+            <li>Class: {{ input.className }}</li>
+            <li>Required: {{ input.required }}</li>
+            <li>Disabled: {{ input.disabled }}</li>
+            <li>Value: {{ input.value }}</li>
+          </ul>
         </li>
       </ul>
     </div>
