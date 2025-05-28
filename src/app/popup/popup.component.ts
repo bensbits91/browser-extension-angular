@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormMessagingService } from '../services/formMessaging.service';
+import { InputMessagingService } from '../services/inputMessaging.service';
 import { ThemeService } from '../services/theme.service';
 import { TabInfoService } from '../services/tabInfo.service';
 
@@ -16,10 +16,10 @@ export class PopupComponent {
   darkMode = false;
   tabTitle = '';
   tabUrl = '';
-  forms: any[] = [];
+  inputs: any[] = [];
 
   constructor(
-    private formMessaging: FormMessagingService,
+    private inputMessaging: InputMessagingService,
     private themeService: ThemeService,
     private tabInfoService: TabInfoService // private ngZone: NgZone
   ) {}
@@ -34,8 +34,8 @@ export class PopupComponent {
       this.tabUrl = info.url;
     });
 
-    this.formMessaging.getForms().then((forms) => {
-      this.forms = forms;
+    this.inputMessaging.getInputs().then((inputs) => {
+      this.inputs = inputs;
     });
   }
 

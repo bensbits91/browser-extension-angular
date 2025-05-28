@@ -2,7 +2,7 @@ import { BackgroundMessagingService } from './backgroundMessaging.service';
 
 /**
  * Service for managing the browser extension's context menu.
- * Adds a "Highlight Forms" menu item and handles its click events.
+ * Adds a "Highlight Inputs" menu item and handles its click events.
  */
 export class ContextMenuService {
   /**
@@ -13,15 +13,15 @@ export class ContextMenuService {
     // Create the context menu item when the extension is installed
     chrome.runtime.onInstalled.addListener(() => {
       chrome.contextMenus.create({
-        id: 'highlight-forms',
-        title: 'Highlight Forms',
+        id: 'highlight-inputs',
+        title: 'Highlight Inputs',
         contexts: ['all'],
       });
     });
 
     // Listen for context menu item clicks and send highlight message
     chrome.contextMenus.onClicked.addListener((info, tab) => {
-      if (info.menuItemId === 'highlight-forms' && tab?.id) {
+      if (info.menuItemId === 'highlight-inputs' && tab?.id) {
         this.messagingService.sendHighlightMessage(tab.id);
       }
     });

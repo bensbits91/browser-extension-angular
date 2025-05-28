@@ -1,12 +1,12 @@
 // /// <reference types="chrome" />
-import { FormStorageService } from '../services/formStorage.service';
+import { InputStorageService } from '../services/inputStorage.service';
 import { ContextMenuService } from '../services/contextMenu.service';
 import { BackgroundMessagingService } from '../services/backgroundMessaging.service';
 
 // // Initializes storage, messaging, and context menu services.
 try {
-  const formStorage = new FormStorageService();
-  const messagingService = new BackgroundMessagingService(formStorage);
+  const inputStorage = new InputStorageService();
+  const messagingService = new BackgroundMessagingService(inputStorage);
   const contextMenuService = new ContextMenuService(messagingService);
 } catch (error) {
   console.error('Error initializing background services:', error);

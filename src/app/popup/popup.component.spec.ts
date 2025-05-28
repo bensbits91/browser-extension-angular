@@ -23,7 +23,7 @@ describe('PopupComponent', () => {
     expect(component.darkMode).toBeFalse();
   });
 
-  it('should have forms as an array', () => {
-    expect(Array.isArray(component.forms)).toBeTrue();
+  it('should have inputs as an array', () => {
+    expect(Array.isArray(component.inputs)).toBeTrue();
   });
 });

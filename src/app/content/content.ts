@@ -1,16 +1,16 @@
-import { FormHelper } from './formHelper';
+import { InputHelper } from './domHelper';
 
-// Report forms when the content script loads
-const formSummaries = FormHelper.getFormSummaries();
+// Report inputs when the content script loads
+const inputSummaries = InputHelper.getInputSummaries();
 chrome.runtime.sendMessage({
-  type: 'FORMS_DETECTED',
-  forms: formSummaries,
+  type: 'INPUTS_DETECTED',
+  inputs: inputSummaries,
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === 'GET_FORMS') {
-    FormHelper.detectForms().then((forms) => {
-      sendResponse({ forms: FormHelper.serializeForms(forms) });
+  if (msg.type === 'GET_INPUTS') {
+    InputHelper.detectInputs().then((inputs) => {
+      sendResponse({ inputs: InputHelper.serializeInputs(inputs) });
     });
     return true; // Keep the message channel open for async response
   }
@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
 // Listen for highlight message from background script
 chrome.runtime.onMessage.addListener((message: any, sender, sendResponse) => {
-  if (message.type === 'HIGHLIGHT_FORMS') {
-    FormHelper.highlightForms();
+  if (message.type === 'HIGHLIGHT_INPUTS') {
+    InputHelper.highlightInputs();
   }
 });

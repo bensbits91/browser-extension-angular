@@ -2,18 +2,18 @@
 import { Injectable, NgZone } from '@angular/core';
 
 /**
- * Service for communicating with content scripts to retrieve form data.
- * Uses Chrome extension messaging APIs to request detected forms from the active tab.
+ * Service for communicating with content scripts to retrieve input data.
+ * Uses Chrome extension messaging APIs to request detected inputs from the active tab.
  */
 @Injectable({ providedIn: 'root' })
-export class FormMessagingService {
+export class InputMessagingService {
   constructor(private ngZone: NgZone) {}
 
   /**
-   * Requests detected forms from the content script in the active tab.
-   * @returns Promise resolving to an array of serialized form summaries.
+   * Requests detected inputs from the content script in the active tab.
+   * @returns Promise resolving to an array of serialized input summaries.
    */
-  getForms(): Promise<any[]> {
+  getInputs(): Promise<any[]> {
     return new Promise((resolve) => {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (!tabs[0]?.id) {
@@ -22,10 +22,10 @@ export class FormMessagingService {
         }
         chrome.tabs.sendMessage(
           tabs[0].id,
-          { type: 'GET_FORMS' },
+          { type: 'GET_INPUTS' },
           (response: any) => {
             this.ngZone.run(() => {
-              resolve(response?.forms || []);
+              resolve(response?.inputs || []);
             });
           }
         );
