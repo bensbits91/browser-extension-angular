@@ -1,9 +1,16 @@
+interface FormSummary {
+  action: string;
+  method: string;
+  id: string;
+  className: string;
+}
+
 export class FormHelper {
   static detectForms(): HTMLFormElement[] {
     return Array.from(document.querySelectorAll('form'));
   }
 
-  static getFormSummaries(): any[] {
+  static getFormSummaries(): FormSummary[] {
     return this.detectForms().map((form) => ({
       action: form.action,
       method: form.method,
@@ -12,9 +19,9 @@ export class FormHelper {
     }));
   }
 
-  static highlightForms(): void {
+  static highlightForms(color: string = '4px solid darkorange'): void {
     this.detectForms().forEach((form) => {
-      (form as HTMLElement).style.outline = '4px solid darkorange';
+      form.style.outline = color;
     });
   }
 }

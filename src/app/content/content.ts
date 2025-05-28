@@ -1,7 +1,5 @@
 import { FormHelper } from './formHelper';
 
-console.log('Content script running...');
-
 // Report forms when the content script loads
 const formSummaries = FormHelper.getFormSummaries();
 chrome.runtime.sendMessage({
@@ -10,7 +8,7 @@ chrome.runtime.sendMessage({
 });
 
 // Listen for highlight message from background script
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message: any, sender, sendResponse) => {
   if (message.type === 'HIGHLIGHT_FORMS') {
     FormHelper.highlightForms();
   }
