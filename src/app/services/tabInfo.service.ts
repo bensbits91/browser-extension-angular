@@ -16,6 +16,11 @@ interface TabInfo {
   providedIn: 'root',
 })
 export class TabInfoService {
+  /**
+   * Retrieves information about the currently active browser tab.
+   * Handles restricted pages (e.g., chrome://, edge://) and unavailable APIs gracefully.
+   * @returns Promise resolving to an object containing the tab's title and URL.
+   */
   getTabInfo(): Promise<{ title: string; url: string }> {
     return new Promise((resolve) => {
       if (typeof chrome !== 'undefined' && chrome.tabs) {

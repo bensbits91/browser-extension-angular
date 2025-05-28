@@ -9,6 +9,10 @@ declare const chrome: any;
 export class ThemeService {
   private readonly key = 'darkMode';
 
+  /**
+   * Sets the dark mode preference in chrome.storage.sync.
+   * @param value - Boolean indicating whether dark mode is enabled.
+   */
   setDarkMode(value: boolean): void {
     if (
       typeof chrome !== 'undefined' &&
@@ -25,6 +29,10 @@ export class ThemeService {
     }
   }
 
+  /**
+   * Retrieves the dark mode preference from chrome.storage.sync.
+   * @returns Promise resolving to a boolean indicating if dark mode is enabled.
+   */
   getDarkMode(): Promise<boolean> {
     return new Promise((resolve) => {
       if (
