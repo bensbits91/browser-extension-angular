@@ -1,7 +1,13 @@
 # Angular Browser Extension (Test Project)
 
 This is a quick test project for me to explore browser extension architecture/features and to refresh my Angular skills.  
-**Note:** This codebase is experimental and a bit messy—it's meant for learning and prototyping, not production!
+
+**Goals:** 
+- Simple detection forms and standalone inputs and textareas
+- List detected elements in the popup UI
+- Add a context menu item to highlight detected elements on the page
+
+**Note:** This codebase might be messy and is meant for learning and exploration :)
 
 ---
 
@@ -13,8 +19,7 @@ This is a quick test project for me to explore browser extension architecture/fe
 - Context menu integration
 - Form detection and highlighting on web pages
 - Dark mode toggle in the popup, persisted to storage.sync
-- TypeScript throughout
-- Modern build tooling: Angular CLI & esbuild
+- Build tooling: Angular CLI & esbuild
 - Service-based architecture for messaging and storage
 
 ---
