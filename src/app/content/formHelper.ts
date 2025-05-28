@@ -95,15 +95,15 @@ export class FormHelper {
 
   /**
    * Highlights all detected form elements with a colored outline.
-   * @param color - The CSS outline style to apply (default: '4px solid darkorange').
+   * @param style - The CSS outline style to apply (default: '4px solid darkorange').
    * @returns Promise that resolves when highlighting is complete.
    */
   static async highlightForms(
-    color: string = '4px solid darkorange'
+    style: string = '4px solid darkorange'
   ): Promise<void> {
     const forms = await this.detectForms();
     forms.forEach((form) => {
-      (form as HTMLElement).style.outline = color;
+      (form as HTMLElement).style.outline = style;
     });
   }
 }
