@@ -1,6 +1,8 @@
 <div class="popup" [ngClass]="{ dark: darkMode }">
   <div class="container">
-    <button class="themeToggle" (click)="toggleDarkMode()">Toggle Dark Mode</button>
+    <button class="themeToggle" (click)="toggleDarkMode()">
+      Toggle Dark Mode
+    </button>
     <div>
       <h2>Current Tab Info</h2>
       <p>Title: {{ tabTitle }}</p>
@@ -9,11 +11,11 @@
     <div *ngIf="forms.length">
       <h2>Detected Forms</h2>
       <ul>
-        <li *ngFor="let form of forms">
-          <strong>Action:</strong> {{ form.action }}<br />
-          <strong>Method:</strong> {{ form.method }}<br />
-          <strong>ID:</strong> {{ form.id }}<br />
-          <strong>Class:</strong> {{ form.className }}
+        <li *ngFor="let form of forms" class="formItem">
+          Action: {{ form.action }}<br />
+          Method: {{ form.method }}<br />
+          ID: {{ form.id }}<br />
+          Class: {{ form.className }}
         </li>
       </ul>
     </div>

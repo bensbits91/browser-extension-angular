@@ -1,59 +1,98 @@
-# BrowserExtensionAngular
+# Angular Browser Extension (Test Project)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+This is a quick test project for me to explore browser extension architecture/features and to refresh my Angular skills.  
+**Note:** This codebase is experimental and a bit messy—it's meant for learning and prototyping, not production!
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Noteworthy Features
 
-```bash
-ng serve
-```
+- **Angular 19** used for the popup UI
+- **Manifest V3** Chrome extension architecture
+- Modular background, content, and popup scripts
+- Context menu integration
+- Form detection and highlighting on web pages
+- Dark mode toggle in the popup, persisted to storage.sync
+- TypeScript throughout
+- Modern build tooling: Angular CLI & esbuild
+- Service-based architecture for messaging and storage
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠️ Stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Angular 19**
+- **TypeScript**
+- **Chrome Extensions API (Manifest V3)**
+- **esbuild** (for background and content script bundling)
+- **Karma/Jasmine** for unit testing
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📦 Project Structure
 
-```bash
-ng generate --help
-```
+- src/
+  - app/
+    - popup/
+    - background/
+    - content/
+    - services/
+- public/
+- dist/
+  - browser/
 
-## Building
+- `popup/`: Angular popup app
+- `background/`: Background service worker
+- `content/`: Content script & helpers
+- `public/`: manifest.json, icons, static assets
+- `dist/browser/`: Extension build output (load this in Chrome)
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 🏗️ How to Build & Use
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+1. **Install dependencies:**
 
-## Running unit tests
+       npm install
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+2. **Build everything:**
 
-```bash
-ng test
-```
+       npm run build:all
 
-## Running end-to-end tests
+   This builds the Angular popup and bundles background/content scripts into `/dist/browser`.
 
-For end-to-end (e2e) testing, run:
+3. **Load the extension in Chrome:**
+   - Go to `chrome://extensions/`
+   - Enable "Developer mode"
+   - Click "Load unpacked"
+   - Select the `/dist/browser` folder
 
-```bash
-ng e2e
-```
+4. **Try it out:**
+   - Click the extension icon to open the popup
+   - Right-click on a page to see the context menu and highlight forms
+   - Use the popup to toggle dark mode and view detected forms
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 🧪 Testing
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Run unit tests with:
+
+       npm test
+
+---
+
+## ⚠️ Notes & Caveats
+
+- This is a **test project**—expect rough edges, incomplete features, and messy code.
+- The repo is intentionally minimal and focused on learning, not production readiness.
+- The extension currently only supports Chrome (Manifest V3).
+- If you run into issues with test types, see the `tsconfig.spec.json` for Jasmine setup.
+
+---
+
+## 📚 Resources
+
+- [Chrome Extensions Developer Guide](https://developer.chrome.com/docs/extensions/)
+- [Angular Documentation](https://angular.dev/)
+- [esbuild Documentation](https://esbuild.github.io/)
