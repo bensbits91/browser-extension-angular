@@ -5,13 +5,21 @@ export interface FormSummary {
   className: string;
 }
 
+/**
+ * Helper class for detecting, serializing, and highlighting form-related elements in the DOM.
+ */
 export class FormHelper {
+  /** CSS selector for input and textarea elements. */
   static INPUT_SELECTOR = 'input, textarea';
+
+  /** Set of input types to ignore (button-like inputs). */
   static INPUTS_TO_IGNORE = new Set(['submit', 'button', 'reset', 'image']);
 
   /**
    * Detects all input and textarea elements in the DOM, excluding button-like inputs.
    * Also observes for new elements added during the timeout window.
+   * @param timeout - The number of milliseconds to observe for new elements before resolving.
+   * @returns Promise resolving to an array of detected input and textarea elements.
    */
   static detectForms(timeout: number = 100): Promise<Element[]> {
     return new Promise((resolve) => {
@@ -30,7 +38,9 @@ export class FormHelper {
       };
 
       // Initial scan
-      document.querySelectorAll(FormHelper.INPUT_SELECTOR).forEach(shouldAddElement);
+      document
+        .querySelectorAll(FormHelper.INPUT_SELECTOR)
+        .forEach(shouldAddElement);
 
       // Observe for new inputs and textareas added to the DOM
       const observer = new MutationObserver((mutations) => {
@@ -38,8 +48,12 @@ export class FormHelper {
           addedNodes.forEach((node: any) => {
             if (!(node instanceof Element)) return;
             // Check the node itself and all its descendants
-            [node, ...(node.querySelectorAll ? Array.from(node.querySelectorAll(FormHelper.INPUT_SELECTOR)) : [])]
-              .forEach((el: Element) => shouldAddElement(el));
+            [
+              node,
+              ...(node.querySelectorAll
+                ? Array.from(node.querySelectorAll(FormHelper.INPUT_SELECTOR))
+                : []),
+            ].forEach((el: Element) => shouldAddElement(el));
           });
         });
       });
@@ -55,8 +69,10 @@ export class FormHelper {
 
   /**
    * Serializes form elements to a summary object.
+   * @param forms - Array of input or textarea elements to serialize.
+   * @returns Array of FormSummary objects.
    */
-  static serializeForms(forms: Element[]) {
+  static serializeForms(forms: Element[]): FormSummary[] {
     return forms.map((form) => {
       const f = form as HTMLFormElement;
       return {
@@ -70,6 +86,7 @@ export class FormHelper {
 
   /**
    * Detects and serializes all form elements in the DOM.
+   * @returns Promise resolving to an array of FormSummary objects.
    */
   static async getFormSummaries(): Promise<FormSummary[]> {
     const forms = await this.detectForms();
@@ -78,6 +95,8 @@ export class FormHelper {
 
   /**
    * Highlights all detected form elements with a colored outline.
+   * @param color - The CSS outline style to apply (default: '4px solid darkorange').
+   * @returns Promise that resolves when highlighting is complete.
    */
   static async highlightForms(
     color: string = '4px solid darkorange'
