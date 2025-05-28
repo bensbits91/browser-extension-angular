@@ -11,6 +11,11 @@
       "128": "star-128.png"
     }
   },
+  "icons": {
+    "16": "star-16.png",
+    "48": "star-48.png",
+    "128": "star-128.png"
+  },
   "background": {
     "service_worker": "background.js"
   },
